@@ -32,16 +32,16 @@ app.use(bodyParser.raw(options));
 
 const decodeJson = require("unescape-json");
 
-// app.use(function (req, res, next) {
-// 	try {
-// 		req.body = decodeJson(req.body.toString());
-// 	}
-// 	catch (err) {
-// 		console.log(err);
-// 	}
-// 	// s3logger.log('info', req.method + ': ' + req.path + "__" + JSON.stringify(req.body));
-// 	next();
-// });
+app.use(function (req, res, next) {
+	try {
+		req.body = decodeJson(req.body.toString());
+	}
+	catch (err) {
+		console.log(err);
+	}
+	// s3logger.log('info', req.method + ': ' + req.path + "__" + JSON.stringify(req.body));
+	next();
+});
 
 webRoutes(app);
 
