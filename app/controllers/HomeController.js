@@ -3,6 +3,7 @@ const homeManager = require('../managers/homeManager')
 const {
 	 Response 
   } = require('../helpers/common');
+const { querySingle } = require('../../config/db');
 router.post('/addDevice', async(req, res, next) => {
 	const [result,error] = await homeManager.createDevice(req.body);
 	if(error){
@@ -29,10 +30,11 @@ router.get('/allLogs', async(req, res, next) => {
 });
 router.get('/view', async(req, res, next) => {
 	const [result,error] = await homeManager.getLatestRecord();
+	const lastTwentyRecords = await querySingle('SELECT * FROM devicelogs ORDER BY timeStamp DESC LIMIT 20');
 	if(error){
 
 		return res.status(200).json(Response('Error while fetching logs', {}, false));
 	}
-	res.render('record', { record: result });
+	res.render('record', { record: result, records: lastTwentyRecords });
 });
 module.exports = router;

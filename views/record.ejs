@@ -9,18 +9,35 @@
       font-family: Arial, sans-serif;
       margin: 20px;
     }
-    .record {
+    .record, .records-table {
       border: 1px solid #ccc;
       padding: 10px;
       margin-top: 10px;
     }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
   </style>
+  <script>
+    setInterval(function() {
+      window.location.reload();
+    }, 10000); // 10 seconds
+  </script>
 </head>
 <body>
   <h1>Last Inserted Record</h1>
   <% if (record) { %>
     <div class="record">
-      <p><strong>ID:</strong> <%= record.id %></p>
+      <p><strong>ID:</strong> <%= record.Id %></p>
       <p><strong>Temp1:</strong> <%= record.temp1 %></p>
       <p><strong>Temp2:</strong> <%= record.temp2 %></p>
       <p><strong>Status:</strong> <%= record.status %></p>
@@ -32,5 +49,43 @@
   <% } else { %>
     <p>No record found.</p>
   <% } %>
+
+  <h2>Last 20 Records</h2>
+  <div class="records-table">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Temp1</th>
+          <th>Temp2</th>
+          <th>Status</th>
+          <th>Alarm</th>
+          <th>Output1</th>
+          <th>Device ID</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (records.length > 0) { %>
+          <% records.forEach(record => { %>
+            <tr>
+              <td><%= record.Id %></td>
+              <td><%= record.temp1 %></td>
+              <td><%= record.temp2 %></td>
+              <td><%= record.status %></td>
+              <td><%= record.alarm %></td>
+              <td><%= record.output1 %></td>
+              <td><%= record.deviceId %></td>
+              <td><%= record.timeStamp %></td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="8">No records found.</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
