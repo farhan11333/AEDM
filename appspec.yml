@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/sketchbox-api
+file_exists_behavior: OVERWRITE
+hooks:
+  AfterInstall:
+    - location: scripts/install-dependencies.sh
+    - location: scripts/chown.sh
+  ApplicationStart:
+    - location: scripts/start-app.sh
+      timeout: 3600
+      runas: ec2-user
+  ApplicationStop:
+    - location: scripts/stop-app.sh
+      timeout: 3600
+      runas: ec2-user
