@@ -11,7 +11,11 @@
       font-family: 'Roboto', sans-serif;
       background-color: #121212;
       color: #ffffff;
-      margin: 20px;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1, h2 {
@@ -21,33 +25,37 @@
     }
 
     .record-container {
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      background: #1c1c1c;
       border-radius: 15px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
       padding: 20px;
+      width: 70%;
       margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
     .record-container:hover {
-      transform: scale(1.01);
+      transform: scale(1.02);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
     }
 
     .record {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 10px;
       justify-content: center;
     }
 
     .record-box {
       background: #222;
       border-radius: 10px;
-      border: 2px solid #00e5ff;
+      border: 1px solid #00e5ff;
       padding: 10px;
-      width: 150px;
-      height: 150px;
+      width: 90px;
+      height: 90px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -57,21 +65,23 @@
     }
 
     .record-box:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
     }
 
     .record-box p {
       margin: 5px 0;
+      font-size: 0.9em;
     }
 
     .record-box p strong {
-      color: #ffeb3b;
-      font-size: 1.2em;
+      color: #00e5ff;
+      font-size: 1em;
     }
 
     .records-table {
       margin-top: 30px;
+      width: 100%;
     }
 
     table {
@@ -113,12 +123,12 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #ff416c;
+      background: #00e5ff;
       border-radius: 10px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: #ff4b2b;
+      background: #00aaff;
     }
 
     ::-webkit-scrollbar-track {
@@ -130,8 +140,31 @@
       window.location.reload();
     }, 10000); // 10 seconds
   </script>
+   <script>
+    function formatTimestamp(timestamp) {
+      const date = new Date(timestamp);
+      return date.toLocaleString('en-US', {
+        weekday: 'long', // "Monday"
+        year: 'numeric', // "2024"
+        month: 'long', // "August"
+        day: 'numeric', // "4"
+        hour: '2-digit', // "08 AM"
+        minute: '2-digit', // "00"
+        second: '2-digit', // "00"
+        hour12: true // "AM/PM"
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const timestamps = document.querySelectorAll('.timestamp');
+      timestamps.forEach(timestamp => {
+        timestamp.textContent = formatTimestamp(timestamp.textContent);
+      });
+    });
+  </script>
 </head>
 <body>
+  
   <h1>Last Inserted Record</h1>
   <% if (record) { %>
     <div class="record-container">
@@ -154,11 +187,11 @@
         </div>
         <div class="record-box">
           <p><strong>Alarm:</strong></p>
-          <p><%= record.alarm %></p>
+          <p><%= record.alarm[0] %></p>
         </div>
         <div class="record-box">
           <p><strong>Output1:</strong></p>
-          <p><%= record.output1 %></p>
+          <p><%= record.output1[0] %></p>
         </div>
         <div class="record-box">
           <p><strong>Device ID:</strong></p>
@@ -166,7 +199,7 @@
         </div>
         <div class="record-box">
           <p><strong>Timestamp:</strong></p>
-          <p><%= record.timeStamp %></p>
+          <p class="timestamp"><%= record.timeStamp %></p>
         </div>
       </div>
     </div>
@@ -197,10 +230,10 @@
               <td><%= record.temp1 %></td>
               <td><%= record.temp2 %></td>
               <td><%= record.status %></td>
-              <td><%= record.alarm %></td>
-              <td><%= record.output1 %></td>
+              <td><%= record.alarm[0] %></td>
+              <td><%= record.output1[0] %></td>
               <td><%= record.deviceId %></td>
-              <td><%= record.timeStamp %></td>
+              <td class="timestamp"><%= record.timeStamp %></td>
             </tr>
           <% }) %>
         <% } else { %>
