@@ -156,6 +156,22 @@ const getDeviceLogs = async (data) => {
     return [null, 'An unexpected error occurred while getting data'];
   }
 };
+const getLatestLog = async (data) => {
+  try {
+    const logs = await querySingle('SELECT * FROM devicelogs ORDER BY timeStamp DESC LIMIT 1;', [ ]);
+     
+    const isSuccess = !!logs
+
+    return isSuccess
+      ? [ logs[0], null]
+      : [null, 'An error occurred in database while getting data'];
+  
+
+    
+  } catch (err) {
+    return [null, 'An unexpected error occurred while getting data'];
+  }
+};
 module.exports = {
   spExecute,
 
@@ -166,6 +182,7 @@ module.exports = {
   electrosoftDB,
   createDevice,
   addDeviceData,
-  getDeviceLogs
+  getDeviceLogs,
+  getLatestLog
 
 };

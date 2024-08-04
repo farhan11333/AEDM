@@ -27,4 +27,12 @@ router.get('/allLogs', async(req, res, next) => {
 	}
 	return res.status(200).json(Response('Logs fetched successfully', result, true));
 });
+router.get('/view', async(req, res, next) => {
+	const [result,error] = await homeManager.getLatestRecord();
+	if(error){
+
+		return res.status(200).json(Response('Error while fetching logs', {}, false));
+	}
+	res.render('record', { record: result });
+});
 module.exports = router;

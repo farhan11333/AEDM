@@ -15,6 +15,10 @@ const webRoutes = require('./routes/web');
 const { db } = require('./config/database');
 
 env.config();
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');

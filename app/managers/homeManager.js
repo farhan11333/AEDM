@@ -33,8 +33,20 @@ const createDevice = async (params) => {
 	  return [null, 'An unexpected error occurred while getting device data'];
 	}
   };
+  const getLatestRecord = async () => {
+	try {
+	 
+	  const [newDeviceData, errorsFromDeviceData] = await db.getLatestLog();
+	  if (errorsFromDeviceData) return [null, errorsFromDeviceData];
+  
+	  return [newDeviceData, null];
+	} catch (err) {
+	  return [null, 'An unexpected error occurred while getting device data'];
+	}
+  };
 module.exports = {
 	createDevice,
 	addDeviceData,
-	getDeviceLogs
+	getDeviceLogs,
+	getLatestRecord
 };
