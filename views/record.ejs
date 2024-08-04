@@ -20,7 +20,7 @@
       margin-bottom: 20px;
     }
 
-    .record {
+    .record-container {
       background: linear-gradient(135deg, #ff416c, #ff4b2b);
       border-radius: 15px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
@@ -29,17 +29,45 @@
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
-    .record:hover {
+    .record-container:hover {
       transform: scale(1.01);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
     }
 
-    .record p {
-      margin: 10px 0;
+    .record {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
     }
 
-    .record p strong {
+    .record-box {
+      background: #222;
+      border-radius: 10px;
+      border: 2px solid #00e5ff;
+      padding: 10px;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      text-align: center;
+    }
+
+    .record-box:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
+    }
+
+    .record-box p {
+      margin: 5px 0;
+    }
+
+    .record-box p strong {
       color: #ffeb3b;
+      font-size: 1.2em;
     }
 
     .records-table {
@@ -106,15 +134,41 @@
 <body>
   <h1>Last Inserted Record</h1>
   <% if (record) { %>
-    <div class="record">
-      <p><strong>ID:</strong> <%= record.Id %></p>
-      <p><strong>Temp1:</strong> <%= record.temp1 %></p>
-      <p><strong>Temp2:</strong> <%= record.temp2 %></p>
-      <p><strong>Status:</strong> <%= record.status %></p>
-      <p><strong>Alarm:</strong> <%= record.alarm %></p>
-      <p><strong>Output1:</strong> <%= record.output1 %></p>
-      <p><strong>Device ID:</strong> <%= record.deviceId %></p>
-      <p><strong>Timestamp:</strong> <%= record.timeStamp %></p>
+    <div class="record-container">
+      <div class="record">
+        <div class="record-box">
+          <p><strong>ID:</strong></p>
+          <p><%= record.Id %></p>
+        </div>
+        <div class="record-box">
+          <p><strong>Temp1:</strong></p>
+          <p><%= record.temp1 %></p>
+        </div>
+        <div class="record-box">
+          <p><strong>Temp2:</strong></p>
+          <p><%= record.temp2 %></p>
+        </div>
+        <div class="record-box">
+          <p><strong>Status:</strong></p>
+          <p><%= record.status %></p>
+        </div>
+        <div class="record-box">
+          <p><strong>Alarm:</strong></p>
+          <p><%= record.alarm %></p>
+        </div>
+        <div class="record-box">
+          <p><strong>Output1:</strong></p>
+          <p><%= record.output1 %></p>
+        </div>
+        <div class="record-box">
+          <p><strong>Device ID:</strong></p>
+          <p><%= record.deviceId %></p>
+        </div>
+        <div class="record-box">
+          <p><strong>Timestamp:</strong></p>
+          <p><%= record.timeStamp %></p>
+        </div>
+      </div>
     </div>
   <% } else { %>
     <p>No record found.</p>
