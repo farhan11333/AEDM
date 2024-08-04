@@ -5,26 +5,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Last Inserted Record</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #ffffff;
       margin: 20px;
     }
-    .record, .records-table {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 10px;
+
+    h1, h2 {
+      color: #00e5ff;
+      text-align: center;
+      margin-bottom: 20px;
     }
+
+    .record {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      margin-top: 20px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .record:hover {
+      transform: scale(1.01);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
+    }
+
+    .record p {
+      margin: 10px 0;
+    }
+
+    .record p strong {
+      color: #ffeb3b;
+    }
+
+    .records-table {
+      margin-top: 30px;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
     }
+
     table, th, td {
-      border: 1px solid #ccc;
+      border: 1px solid #2c2c2c;
     }
-    th, td {
-      padding: 8px;
-      text-align: left;
+
+    th {
+      background-color: #333333;
+      color: #00e5ff;
+      padding: 12px;
+    }
+
+    td {
+      background-color: #222222;
+      padding: 10px;
+    }
+
+    td, th {
+      text-align: center;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #1b1b1b;
+    }
+
+    tbody tr:hover {
+      background-color: #333333;
+    }
+
+    /* Scroll bar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #ff416c;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff4b2b;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #121212;
     }
   </style>
   <script>
