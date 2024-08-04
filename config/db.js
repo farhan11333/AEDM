@@ -128,10 +128,10 @@ const addDeviceData = async (data) => {
      
     ]);
      
-    const isSuccess = insertedResult.affectedRows>0
+    const isSuccess =insertedResult[0][0]?.insertedId>0
 
     return isSuccess
-      ? [ insertedResult, null]
+      ? [ {id:insertedResult[0][0]?.insertedId}, null]
       : [null, 'An error occurred in database while adding data'];
   
 
